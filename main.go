@@ -15,7 +15,9 @@ var apiClient *Client
 
 func main() {
 	baseURL := envOrDefault("BRIDGEFT_BASE_URL", "https://api.bridgeft.com/v2")
-	apiClient = NewClient(baseURL)
+	clientID := os.Getenv("BRIDGEFT_CLIENT_ID")
+	clientSecret := os.Getenv("BRIDGEFT_CLIENT_SECRET")
+	apiClient = NewClient(baseURL, clientID, clientSecret)
 
 	server := mcp.NewServer(
 		&mcp.Implementation{Name: "bridgeft", Version: "1.0.0"},
